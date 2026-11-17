@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PassoCerto | O tênis ideal para a sua posição</title>
+
+  <!-- Fontes do Google (opcional: se estiver sem internet, o site usa fontes do sistema) -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Arquivo de estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+  ===========================================================
+  COMO ADICIONAR AS FOTOS DOS TÊNIS
+  As fotos NÃO ficam neste arquivo. Elas são ligadas no script.js:
+    1. Crie uma pasta chamada "img" ao lado deste index.html.
+    2. Salve nela uma foto de cada tênis (de preferência com fundo branco).
+    3. O nome do arquivo precisa ser igual ao campo "imagem" da lista
+       "tenis" no script.js. Exemplo: img/nike-gt-cut.jpg
+    4. Veja o comentário "ONDE ADICIONAR AS FOTOS" no script.js.
+  ===========================================================
+  -->
+
+  <a class="pular" href="#buscar">Pular para o conteúdo</a>
+
+  <!-- ================= CABEÇALHO ================= -->
+  <header class="cabecalho">
+    <div class="container">
+      <a class="logo" href="#topo">Passo<span>Certo</span></a>
+
+      <nav aria-label="Menu principal">
+        <a href="#buscar">Buscar</a>
+        <a href="#analise">Como analisamos</a>
+        <a href="#contato">Contato</a>
+        <a href="#login">Entrar</a>
+      </nav>
+
+      <span id="saudacao" class="saudacao"></span>
+      <button id="btn-tema" class="botao-borda" type="button">Modo escuro</button>
+      <button id="btn-acess" class="botao-borda" type="button" aria-expanded="false" aria-controls="painel-acess">Acessibilidade</button>
+    </div>
+  </header>
+
+  <!-- ================= PAINEL DE ACESSIBILIDADE ================= -->
+  <aside id="painel-acess" class="painel" aria-label="Opções de acessibilidade" hidden>
+    <h2>Acessibilidade</h2>
+
+    <p class="rotulo">Tema</p>
+    <div class="grupo">
+      <button type="button" class="botao-borda" data-tema="claro">Claro</button>
+      <button type="button" class="botao-borda" data-tema="escuro">Escuro</button>
+    </div>
+
+    <p class="rotulo">Tamanho do texto</p>
+    <div class="grupo">
+      <button type="button" class="botao-borda" data-fonte="menos" aria-label="Diminuir texto">A−</button>
+      <button type="button" class="botao-borda" data-fonte="normal" aria-label="Tamanho normal">A</button>
+      <button type="button" class="botao-borda" data-fonte="mais" aria-label="Aumentar texto">A+</button>
+    </div>
+
+    <label class="opcao"><input type="checkbox" id="chk-contraste"> Alto contraste</label>
+    <label class="opcao"><input type="checkbox" id="chk-links"> Sublinhar links</label>
+
+    <button type="button" class="botao-borda" id="btn-restaurar">Restaurar padrão</button>
+  </aside>
+
+  <main id="topo">
+
+    <!-- ================= INÍCIO (HERO) ================= -->
+    <div class="hero">
+      <div class="container">
+        <p class="sobretitulo">Calçado esportivo por posição</p>
+        <h1>O tênis certo para a sua função em quadra.</h1>
+        <p class="subtitulo">Cada posição pede algo diferente do calçado. Escolha o esporte e a função e veja os modelos mais compatíveis com o que você realmente faz.</p>
+
+        <!-- Pesquisa -->
+        <form id="form-busca" class="busca" role="search" aria-label="Buscar esporte, posição ou modelo">
+          <div>
+            <label for="campo-busca">Buscar esporte, posição ou modelo</label>
+            <input id="campo-busca" list="sugestoes" placeholder="Ex.: líbero, armador, goleiro…" autocomplete="off">
+          </div>
+          <button class="botao" type="submit">Pesquisar</button>
+        </form>
+        <datalist id="sugestoes"></datalist>
+        <p id="msg-busca" class="mensagem" role="status"></p>
+      </div>
+    </div>
+
+    <!-- ================= BUSCA POR ABAS + CARROSSEL ================= -->
+    <section id="buscar" aria-labelledby="t-buscar">
+      <div class="container">
+        <h2 id="t-buscar">Encontre o seu tênis</h2>
+        <p class="texto-suave">Escolha o esporte, depois a posição, e compare os modelos por compatibilidade.</p>
+
+        <!-- Abas de esportes (preenchidas pelo JavaScript) -->
+        <div id="abas" role="tablist" aria-label="Esportes"></div>
+
+        <!-- Botões de posições (preenchidos pelo JavaScript) -->
+        <div id="posicoes" class="posicoes" role="group" aria-label="Posições"></div>
+
+        <!-- O que a posição exige do tênis -->
+        <div id="exigencias" class="exigencias" aria-live="polite"></div>
+
+        <!-- Carrossel de cartões com as imagens dos tênis -->
+        <div role="region" aria-roledescription="carrossel" aria-label="Tênis recomendados">
+          <div id="carrossel" class="carrossel" tabindex="0"></div>
+          <div class="controles">
+            <button id="btn-anterior" class="botao-borda" type="button" aria-label="Tênis anterior">←</button>
+            <button id="btn-proximo" class="botao-borda" type="button" aria-label="Próximo tênis">→</button>
+          </div>
+        </div>
+
+        <p class="aviso">As notas de 1 a 5 são estimativas didáticas deste projeto acadêmico, não medições de laboratório. Prove o modelo e confira a numeração antes de comprar.</p>
+      </div>
+    </section>
+
+    <!-- ================= CARTÕES EXPLICATIVOS ================= -->
+    <section id="analise" class="destaque" aria-labelledby="t-analise">
+      <div class="container">
+        <h2 id="t-analise">Como analisamos</h2>
+        <p class="texto-suave">Cada posição recebe um perfil de 1 a 5 em cinco características. A compatibilidade mede o quanto o tênis se aproxima desse perfil: faltar o que a posição exige pesa mais do que sobrar.</p>
+
+        <div class="grade">
+          <article class="cartao-explica"><span>01</span><h3>Amortecimento</h3><p>Absorve o impacto de saltos e corridas e protege joelhos e tornozelos.</p></article>
+          <article class="cartao-explica"><span>02</span><h3>Estabilidade lateral</h3><p>Segura o pé em mudanças de direção e reduz o risco de torção.</p></article>
+          <article class="cartao-explica"><span>03</span><h3>Tração</h3><p>Aderência da sola à superfície: parar, arrancar e girar sem escorregar.</p></article>
+          <article class="cartao-explica"><span>04</span><h3>Leveza</h3><p>Menos peso significa mais velocidade e menos cansaço ao longo da partida.</p></article>
+          <article class="cartao-explica"><span>05</span><h3>Durabilidade</h3><p>Resistência da sola e do cabedal ao desgaste do esporte e da superfície.</p></article>
+          <article class="cartao-explica"><span>06</span><h3>Um tênis, vários esportes</h3><p>Tênis de quadra fechada costumam servir em vários esportes. Por isso um modelo de basquete pode aparecer entre as opções de vôlei, e cada cartão indica onde ele é usado.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LOGIN ================= -->
+    <section id="login" aria-labelledby="t-login">
+      <div class="container">
+        <h2 id="t-login">Entrar</h2>
+        <p class="texto-suave">Login de demonstração: nenhum dado é enviado a um servidor.</p>
+
+        <form id="form-login" class="formulario" novalidate>
+          <div>
+            <label for="login-email">E-mail</label>
+            <input id="login-email" type="email" required autocomplete="email">
+          </div>
+          <div>
+            <label for="login-senha">Senha (mínimo 6 caracteres)</label>
+            <input id="login-senha" type="password" required minlength="6" autocomplete="current-password">
+          </div>
+          <div><button class="botao" type="submit">Entrar</button></div>
+          <p id="msg-login" class="mensagem" role="status"></p>
+        </form>
+
+        <!-- Aparece depois do login -->
+        <div id="logado" class="formulario" hidden>
+          <p>Você entrou como <strong id="nome-usuario"></strong>.</p>
+          <div><button id="btn-sair" class="botao-borda" type="button">Sair</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTATO ================= -->
+    <section id="contato" class="destaque-claro" aria-labelledby="t-contato">
+      <div class="container">
+        <h2 id="t-contato">Fale com a gente</h2>
+        <p class="texto-suave">Sugira um esporte, uma posição ou um modelo de tênis.</p>
+
+        <form id="form-contato" class="formulario" novalidate>
+          <div>
+            <label for="c-nome">Nome</label>
+            <input id="c-nome" required autocomplete="name">
+          </div>
+          <div>
+            <label for="c-email">E-mail</label>
+            <input id="c-email" type="email" required autocomplete="email">
+          </div>
+          <div>
+            <label for="c-esporte">Esporte de interesse</label>
+            <select id="c-esporte"></select>
+          </div>
+          <div>
+            <label for="c-msg">Mensagem</label>
+            <textarea id="c-msg" rows="4" required></textarea>
+          </div>
+          <div><button class="botao" type="submit">Enviar mensagem</button></div>
+          <p id="msg-contato" class="mensagem" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= RODAPÉ ================= -->
+  <footer class="rodape">
+    <div class="container">
+      <div>
+        <a class="logo" href="#topo">Passo<span>Certo</span></a>
+        <p>Projeto acadêmico de Desenvolvimento de Interfaces · UniCEUB</p>
+      </div>
+      <div>
+        <p>Os formulários deste site são simulações e não enviam dados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Arquivo de JavaScript (sempre no final do body) -->
+  <script src="script.js"></script>
+</body>
+</html>

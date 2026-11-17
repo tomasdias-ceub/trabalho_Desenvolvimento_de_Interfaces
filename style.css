@@ -1,0 +1,248 @@
+/* =========================================================
+   PASSOCERTO - style.css
+   Paleta do projeto:
+   #F4F4F9 branco gelo (fundo)   #0B132B azul-marinho (cabeçalho/rodapé)
+   #1C2541 cinza chumbo (texto)  #FF7F11 laranja (botões)
+   ========================================================= */
+
+/* ---------- 1. VARIÁVEIS DE COR (tema claro é o padrão) ---------- */
+:root {
+  --fundo: #F4F4F9;
+  --texto: #1C2541;
+  --texto-suave: #3f4868;
+  --cartao: #ffffff;
+  --borda: #7a809c;      /* bordas de botões e campos */
+  --linha: #dcdeea;      /* linhas decorativas */
+  --destaque: #0B132B;   /* fundo de seções de destaque e rodapé */
+  --laranja: #FF7F11;
+  --sel-fundo: #0B132B;  /* botão/aba selecionado */
+  --sel-texto: #F4F4F9;
+  --foco: #1C2541;
+  --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;
+  --fonte-texto: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+/* ---------- 2. TEMA ESCURO (o JavaScript troca o atributo data-tema) ---------- */
+html[data-tema="escuro"] {
+  --fundo: #0B132B;
+  --texto: #F4F4F9;
+  --texto-suave: #c9cce0;
+  --cartao: #1C2541;
+  --borda: #6a7599;
+  --linha: #26325a;
+  --destaque: #1C2541;
+  --sel-fundo: #FF7F11;
+  --sel-texto: #0B132B;
+  --foco: #FF7F11;
+}
+
+/* ---------- 3. ALTO CONTRASTE (ativado no painel de acessibilidade) ---------- */
+html.alto-contraste {
+  --fundo: #000000;
+  --texto: #ffffff;
+  --texto-suave: #ffffff;
+  --cartao: #000000;
+  --borda: #ffffff;
+  --linha: #ffffff;
+  --destaque: #000000;
+  --laranja: #ffff00;
+  --sel-fundo: #ffff00;
+  --sel-texto: #000000;
+  --foco: #ffff00;
+}
+html.alto-contraste .foto { background: #ffffff; }
+
+/* Opção "Sublinhar links" */
+html.links-sublinhados a { text-decoration: underline !important; }
+
+/* ---------- 4. BASE ---------- */
+/* Todos os tamanhos usam "rem", então o botão A+ do painel aumenta tudo */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--fonte-titulo); font-weight: 400; margin: 0 0 .6rem; }
+h2 { font-size: 2.2rem; line-height: 1.15; }
+p { margin: 0 0 1rem; }
+
+/* Foco visível para quem usa teclado (WCAG) */
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; }
+
+.container { max-width: 1120px; margin: 0 auto; padding: 0 1.4rem; }
+section { padding: 4.5rem 0; }
+.texto-suave { color: var(--texto-suave); max-width: 60ch; margin-bottom: 2rem; }
+
+/* Link "pular para o conteúdo" (aparece só ao usar o teclado) */
+.pular { position: absolute; left: -999px; background: var(--laranja); color: #000; padding: .6rem 1rem; z-index: 100; }
+.pular:focus { left: 1rem; top: 1rem; }
+
+/* ---------- 5. CABEÇALHO ---------- */
+.cabecalho .container {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .6rem 1.4rem; padding-top: 1.2rem; padding-bottom: 1.2rem;
+}
+.logo { font-family: var(--fonte-titulo); font-size: 1.5rem; text-decoration: none; margin-right: auto; }
+.logo span { color: var(--laranja); }
+nav { display: flex; flex-wrap: wrap; gap: 1.4rem; font-size: .92rem; }
+nav a { text-decoration: none; padding: .5rem 0; border-bottom: 1px solid transparent; }
+nav a:hover { border-bottom-color: var(--texto); }
+.saudacao { font-size: .9rem; color: var(--texto-suave); }
+
+/* ---------- 6. BOTÕES ---------- */
+.botao, .botao-borda {
+  font: 500 .95rem var(--fonte-texto);
+  min-height: 44px;          /* tamanho mínimo de toque */
+  padding: .5rem 1.3rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.botao { background: var(--laranja); color: #0B132B; border: 1px solid var(--laranja); }
+.botao:hover { filter: brightness(1.08); }
+.botao-borda { background: transparent; color: var(--texto); border: 1px solid var(--borda); }
+.botao-borda:hover { background: var(--linha); }
+html.alto-contraste .botao-borda:hover { background: #333; }
+
+/* ---------- 7. PAINEL DE ACESSIBILIDADE ---------- */
+.painel {
+  position: fixed; top: 4.6rem; right: 1rem; z-index: 50;
+  width: min(320px, calc(100% - 2rem));
+  background: var(--cartao); color: var(--texto);
+  border: 1px solid var(--borda); border-radius: 18px;
+  padding: 1.3rem; box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
+}
+.painel[hidden] { display: none; }
+.painel h2 { font-size: 1.4rem; }
+.rotulo { font-size: .85rem; font-weight: 600; margin: 1rem 0 .4rem; }
+.grupo { display: flex; flex-wrap: wrap; gap: .5rem; }
+.opcao { display: flex; align-items: center; gap: .6rem; margin: .8rem 0; min-height: 44px; cursor: pointer; }
+.opcao input { width: 1.3rem; height: 1.3rem; }
+.painel button[aria-pressed="true"] { background: var(--sel-fundo); color: var(--sel-texto); border-color: var(--sel-fundo); }
+
+/* ---------- 8. INÍCIO (HERO) ---------- */
+.hero { padding: 4rem 0 3rem; }
+.sobretitulo { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--texto-suave); }
+.hero h1 { font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: 1.05; max-width: 15ch; margin-bottom: 1.2rem; }
+.subtitulo { max-width: 52ch; color: var(--texto-suave); font-size: 1.1rem; margin-bottom: 2rem; }
+
+/* ---------- 9. FORMULÁRIOS E CAMPOS ---------- */
+label { display: block; font-size: .85rem; font-weight: 500; color: var(--texto-suave); margin-bottom: .2rem; }
+input, select, textarea {
+  width: 100%; font: inherit; color: var(--texto);
+  background: transparent; border: 0; border-bottom: 1px solid var(--borda);
+  padding: .7rem .1rem; min-height: 44px;
+}
+textarea { border: 1px solid var(--borda); border-radius: 12px; padding: .8rem; }
+select option { color: #1C2541; }
+
+.busca { display: flex; flex-wrap: wrap; gap: .8rem; align-items: flex-end; max-width: 680px; }
+.busca div { flex: 1 1 280px; }
+.formulario { display: grid; gap: 1.3rem; max-width: 560px; }
+.mensagem { min-height: 1.6rem; font-weight: 500; margin: .6rem 0 0; }
+
+/* ---------- 10. ABAS E POSIÇÕES ---------- */
+#abas { display: flex; flex-wrap: wrap; gap: 0 1.6rem; border-bottom: 1px solid var(--linha); margin-bottom: 1.4rem; }
+#abas button {
+  font: 500 1rem var(--fonte-texto); min-height: 44px; padding: .4rem 0;
+  background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  color: var(--texto-suave); cursor: pointer;
+}
+#abas button[aria-selected="true"] { color: var(--texto); border-bottom-color: var(--sel-fundo); }
+
+.posicoes { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+.posicoes button {
+  font: 500 .92rem var(--fonte-texto); min-height: 44px; padding: .4rem 1.1rem;
+  border-radius: 999px; border: 1px solid var(--borda);
+  background: transparent; color: var(--texto); cursor: pointer;
+}
+.posicoes button[aria-pressed="true"] { background: var(--sel-fundo); color: var(--sel-texto); border-color: var(--sel-fundo); }
+
+/* ---------- 11. O QUE A POSIÇÃO EXIGE + BARRAS DE NOTAS ---------- */
+.exigencias {
+  display: grid; gap: 1.2rem 3rem; grid-template-columns: 1fr;
+  padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--linha);
+}
+@media (min-width: 800px) { .exigencias { grid-template-columns: 1fr 1.1fr; } }
+.exigencias h3 { font-size: 1.6rem; }
+.exigencias p { color: var(--texto-suave); margin: 0; }
+
+.barra { display: grid; grid-template-columns: 8.6rem 1fr 2.3rem; gap: .7rem; align-items: center; font-size: .86rem; margin: .35rem 0; }
+.barra b { font-weight: 500; text-align: right; }
+.trilho { height: 5px; background: var(--linha); border-radius: 5px; overflow: hidden; }
+.trilho i { display: block; height: 100%; background: var(--sel-fundo); border-radius: 5px; }
+
+/* ---------- 12. CARROSSEL E CARTÕES DOS TÊNIS ---------- */
+.carrossel {
+  display: flex; gap: 1.4rem; overflow-x: auto;
+  scroll-snap-type: x mandatory; padding: .4rem .3rem 1.4rem;
+}
+.carrossel > article { flex: 0 0 min(86%, 330px); scroll-snap-align: start; }
+.controles { display: flex; gap: .6rem; justify-content: flex-end; }
+
+.cartao { background: var(--cartao); border: 1px solid var(--linha); border-radius: 22px; overflow: hidden; }
+html.alto-contraste .cartao { border-color: #fff; }
+
+/* Área da foto */
+.foto { position: relative; background: #fff; aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 1rem; }
+.foto img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.sem-foto { color: #3f4868; font-size: .85rem; text-align: center; margin: 0; }
+.selo {
+  position: absolute; top: .9rem; left: .9rem;
+  background: #0B132B; color: #F4F4F9; font-size: .74rem; font-weight: 600;
+  border-radius: 999px; padding: .2rem .8rem;
+}
+.selo.melhor { background: var(--laranja); color: #0B132B; }
+
+.cartao-corpo { padding: 1.2rem 1.4rem 1.5rem; }
+.cartao-corpo h3 { font-size: 1.3rem; margin-bottom: .2rem; }
+.uso { font-size: .84rem; color: var(--texto-suave); margin-bottom: .9rem; }
+.nota { font: 400 2.2rem/1 var(--fonte-titulo); }
+.nota small { font: 500 .82rem var(--fonte-texto); color: var(--texto-suave); }
+.cartao-corpo .barra { grid-template-columns: 7.4rem 1fr 2.1rem; font-size: .8rem; margin: .2rem 0; }
+.mini-barras { margin: .9rem 0 1rem; }
+
+.btn-detalhes {
+  background: none; border: 0; border-bottom: 1px solid var(--texto);
+  color: var(--texto); font: 500 .92rem var(--fonte-texto);
+  min-height: 44px; padding: .6rem 0 .1rem; cursor: pointer;
+}
+.detalhes { font-size: .9rem; color: var(--texto-suave); margin: .8rem 0 0; }
+.aviso { font-size: .85rem; color: var(--texto-suave); max-width: 70ch; margin-top: 1rem; }
+
+/* ---------- 13. SEÇÕES DE DESTAQUE E CARTÕES EXPLICATIVOS ---------- */
+.destaque { background: var(--destaque); color: #F4F4F9; }
+.destaque .texto-suave { color: #c9cce0; }
+.destaque-claro { background: var(--cartao); }
+
+.grade { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.cartao-explica { padding: 1.6rem; border: 1px solid rgba(244, 244, 249, .2); border-radius: 18px; }
+.cartao-explica span { font-family: var(--fonte-titulo); color: #FF7F11; }
+html.alto-contraste .cartao-explica span { color: #ffff00; }
+.cartao-explica h3 { font-size: 1.3rem; margin: .3rem 0 .5rem; }
+.cartao-explica p { margin: 0; font-size: .95rem; color: #c9cce0; }
+
+/* ---------- 14. RODAPÉ ---------- */
+.rodape { background: var(--destaque); color: #F4F4F9; padding: 3rem 0; font-size: .9rem; }
+.rodape .container { display: flex; flex-wrap: wrap; gap: 1rem 3rem; justify-content: space-between; }
+.rodape p { color: #c9cce0; margin: .2rem 0; }
+html.alto-contraste .rodape, html.alto-contraste .destaque { border-top: 1px solid #fff; }
+
+/* ---------- 15. CELULAR ---------- */
+@media (max-width: 560px) {
+  h2 { font-size: 1.8rem; }
+  nav { gap: 1rem; }
+  .barra { grid-template-columns: 7rem 1fr 2.2rem; }
+}
+
+/* Quem prefere menos movimento não vê rolagem suave */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
